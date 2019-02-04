@@ -1,0 +1,69 @@
+<Project>
+
+  <ItemGroup>
+    <Compile Remove="**/*Bench.cs;**/*Test.cs;**/*Main.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="**/*Test.cs"  Condition="'$(Configuration)'=='Test'"/>
+    <Compile Include="**/*Test.cs"  Condition="'$(Configuration)'=='Test_Release'"/>
+    <Compile Include="**/*Bench.cs" Condition="'$(Configuration)'=='Bench'"/>
+    <Compile Include="**/*Main.cs"  Condition="'$(Configuration)'=='Main'"/>
+    <Compile Include="**/*Main.cs"  Condition="'$(Configuration)'=='Main_Release'"/>
+    <Watch Include="**\*.cs" />
+  </ItemGroup>
+
+  <ItemGroup  Condition="'$(Configuration)'=='Bench' OR '$(Configuration)'=='Debug'">
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(Configuration)'=='Test' OR '$(Configuration)'=='Test_Release' OR '$(Configuration)'=='Debug'">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Main'">
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE;MAIN</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+    <OutputType>exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Main_Release'">
+    <DefineConstants>$(DefineConstants);RELEASE;TRACE;MAIN</DefineConstants>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>true</Optimize>
+    <OutputType>exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Test'">
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE;TEST</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Test_Release'">
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <DefineConstants>$(DefineConstants);RELEASE;TRACE;TEST</DefineConstants>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Bench'">
+    <DefineConstants>$(DefineConstants);RELEASE;TRACE;BENCH</DefineConstants>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <Optimize>true</Optimize>
+    <OutputType>exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+</Project>
