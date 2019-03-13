@@ -32,9 +32,9 @@ Having said all of that, for the daring souls, here is one way to achieve most o
 # How to use it
 Here are the steps:
 
-1. Type `dotnet new -i MyNugetPackageID`.
+1. Type `dotnet new -i Lucabol.SingleSourceProject`.
 2. Create a directory for your project and cd to it.
-3. Type `dotnet new oneproject` and optionally `--standardVersion <netstandardXX> --appVersion <netcoreappXX>`.
+3. Type `dotnet new lsingleproject` and optionally `--standardVersion <netstandardXX> --appVersion <netcoreappXX>`.
 4. Either modify the `Library.cs`, `Main.cs`, `Test.cs`, `Bench.cs` files or create your own with this convention:
     * Code for the executable goes in potentially multiple files named `XXXMain.cs` (i.e. `MyLibrary.Main.cs`).
     * Code for the tests goes into files named `XXXTest.cs` (i.e. `MyLibrary.Test.cs`).
